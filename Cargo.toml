@@ -2,12 +2,8 @@
 name = "shadowforge"
 version = "0.1.0"
 edition = "2021"
+description = "Kernel-level resilient infrastructure for high-adversity environments"
+license = "GPL-3.0"
 
 [dependencies]
-libc = "0.2"
-nix = { version = "0.29", features = ["process"] }
 rand = "0.8"
-
-[lib]
-name = "shadowforge"
-path = "src/lib.rs"
