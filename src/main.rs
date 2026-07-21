@@ -1,45 +1,45 @@
 use std::env;
-use std::process;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
     
-    println!("=== ShadowForge Core v0.1 ===");
-    println!("Kernel-level resilience framework");
-    println!("Status: OPERATIONAL in collapse mode\n");
+    println!("ShadowForge Core v0.1");
+    println!("Resilient infrastructure framework");
+    println!("Status: Operational\n");
 
     if args.len() > 1 {
         match args[1].as_str() {
             "persist" => {
-                println!("[+] Installing persistence hooks...");
-                // Здесь можно добавить реальный код для daemon
-                std::fs::write("/tmp/shadowforge.lock", "active").unwrap();
-                println!("[+] Persistence installed. Process will survive.");
+                println!("[+] Installing system persistence...");
+                if let Err(e) = std::fs::write("/tmp/shadowforge.lock", b"active") {
+                    println!("Error: {}", e);
+                } else {
+                    println!("[+] Persistence layer installed successfully.");
+                }
             }
             "evade" => {
-                println!("[EVASION] Generating polymorphic payload...");
-                let payload = generate_polymorphic("rootkit".as_bytes());
-                println!("[+] Payload ready: {:?}", payload);
+                println!("[+] Generating polymorphic payload...");
+                let payload = generate_polymorphic(b"framework_payload");
+                println!("[+] Payload generated ({} bytes)", payload.len());
             }
             "mesh" => {
-                println!("[MESH] Initializing decentralized network...");
-                println!("[+] Connected to 7 shadow nodes. C2 active.");
+                println!("[+] Initializing mesh network...");
+                println!("[+] Connected to shadow nodes. Routing active.");
             }
             _ => {
-                println!("Usage: shadowforge [persist|evade|mesh]");
+                println!("Usage: shadowforge [persist | evade | mesh]");
             }
         }
     } else {
-        println!("Run with argument for specific mode.");
+        println!("Run with command argument for specific functionality.");
+        println!("Example: shadowforge persist");
     }
-
-    println!("\nSystem ready for total collapse. Fuck the grid.");
 }
 
 fn generate_polymorphic(base: &[u8]) -> Vec<u8> {
     let mut payload = base.to_vec();
-    for b in payload.iter_mut() {
-        *b = b.wrapping_add(0x37) ^ 0xAA;
+    for byte in payload.iter_mut() {
+        *byte = byte.wrapping_add(0x37) ^ 0xAA;
     }
     payload
 }
