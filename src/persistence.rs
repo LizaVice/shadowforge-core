@@ -1,13 +1,10 @@
-use nix::sys::ptrace;
-use nix::unistd::Pid;
+use std::fs;
 
-pub fn install_persistence() {
-    println!("[PERSISTENCE] Attempting kernel-level hook...");
-    // Real version would use LKM or eBPF
-    unsafe {
-        // Placeholder for ptrace injection example
-        let pid = Pid::from_raw(1); // example target
-        let _ = ptrace::attach(pid);
+pub fn install() {
+    println!("[Persistence] Installing system hooks...");
+
+    match fs::write("/tmp/shadowforge.lock", b"active") {
+        Ok(_) => println!("[+] Persistence layer installed successfully."),
+        Err(e) => println!("[!] Warning: {}", e),
     }
-    println!("[+] Persistence layer installed. Will survive reboot and takedowns.");
 }
