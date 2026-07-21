@@ -16,3 +16,7 @@ git clone https://github.com/LizaVice/shadowforge-core.git
 cd shadowforge-core
 cargo build --release
 ./target/release/shadowforge persist
+
+## Testing
+```bash
+cargo test
