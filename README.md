@@ -20,3 +20,4 @@ cargo build --release
 ## Testing
 ```bash
 cargo test
+## CI Status
